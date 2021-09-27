@@ -74,3 +74,13 @@ a {
         }
     }
 }
+
+.basis {
+    flex-basis: 100%;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}

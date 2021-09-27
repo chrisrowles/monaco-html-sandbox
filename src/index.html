@@ -13,14 +13,6 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://code.rowles.ch" />
     <meta property="og:image" content="http://code.rowles.ch/screenshot.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css"
-          integrity="sha512-sVSECYdnRMezwuq5uAjKQJEcu2wybeAPjU4VJQ9pCRcCY4pIpIw4YMHIOQ0CypfwHRvdSPbH++dA3O4Hihm/LQ=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -43,9 +35,9 @@
             </li>
         </ul>
     </nav>
-    <div id="content" class="d-flex flex-column">
+    <div id="content">
         <!-- menu & tabs -->
-        <div class="d-flex flex-row tab-area">
+        <div class="tab-area">
             <ul class="nav nav-tabs p-0 rounded-0 mr-auto" id="lang-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="#" data-lang="html">HTML</a>
@@ -65,12 +57,18 @@
                 </li>
             </ul>
         </div>
+        <!-- submenu -->
         <div class="py-2 bg-dark"></div>
-        <div class="flex-grow-1">
+        <!-- content -->
+        <div class="sandbox-area">
             <!-- code editor area -->
-            <div id="code-editor" class="h-50"></div>
+            <div id="code-editor-container">
+                <div id="code-editor"></div>
+            </div>
             <!-- code output area -->
-            <iframe id="code-executor" class="h-50 w-100 border-0"></iframe>
+            <div id="code-executor-container">
+                <iframe id="code-executor"></iframe>
+            </div>
         </div>
     </div>
 </div>

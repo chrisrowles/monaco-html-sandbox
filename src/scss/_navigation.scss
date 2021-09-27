@@ -1,6 +1,19 @@
 .tab-area {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
     background: #222222;
     border: none;
+}
+
+.sandbox-area {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
 }
 
 .nav-tabs {

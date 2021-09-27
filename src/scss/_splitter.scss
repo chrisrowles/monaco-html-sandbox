@@ -1,0 +1,15 @@
+.split {
+    display: flex;
+    flex-direction: row;
+}
+
+.gutter {
+    background-color: #1a1a1a;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-vertical {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAYAAABSIVz6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAsSURBVChTYzxz5sx/BiAwNjZmBNFnz56lC58JRAwEYPz/H+wAuoORFtQMDADGbkHLElXbCwAAAABJRU5ErkJggg==');
+    cursor: row-resize;
+}

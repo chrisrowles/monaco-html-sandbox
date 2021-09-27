@@ -1,0 +1,23 @@
+.swal2-container {
+    width: 500px !important;
+}
+
+.swal2-html-container {
+    color: #eeeeee !important;
+}
+
+.swal2-title {
+    color: #eeeeee !important;
+}
+
+.swal2-popup {
+    &.swal2-toast {
+        background: #1b1b1b !important;
+        color: #eeeeee !important;
+
+        .swal2-title {
+            color: #eeeeee !important;
+            text-transform: uppercase;
+        }
+    }
+}

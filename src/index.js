@@ -1,56 +1,49 @@
+import { dom, library } from '@fortawesome/fontawesome-svg-core'
+import { faClipboard, faCode, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { editorConfig, modelDefinitions } from './config'
 import impala from '@godeploy/impala'
+import notify from './notify'
+import Split from 'split.js'
+
+library.add(faClipboard, faCode, faCog, faGithub)
+dom.watch()
+
+const codeEditor = '#code-editor'
+const tabArea = '#lang-tabs'
+const codeExecutor = '#code-executor'
 
 document.addEventListener('DOMContentLoaded', () => {
-    impala.multicode('#code-editor', '#lang-tabs', {
-        accessibilityPageSize: 1000,
-        automaticLayout: true,
-        fastScrollSensitivity: 5,
-        fontLigatures: true,
-        formatOnPaste: true,
-        formatOnType: true,
-        inlineSuggest: {
-            enabled: true,
-            mode: 'prefix'
-        },
-        largeFileOptimizations: true,
-        renderLineHighlight: 'gutter',
-        roundedSelection: false,
-        smoothScrolling: true,
-        showFoldingControls: 'always',
-        theme: 'vs-dark',
-        useShadowDOM: true
-    }, {
-        html: {
-            model: null,
-            state: null
-        },
-        css: {
-            model: null,
-            state: null
-        },
-        javascript: {
-            model: null,
-            state: null
-        },
-    }).then((editor) => {
-        editor.onDidChangeModelContent(() => {
-            const model = editor.getModel()
+    impala.multicode(codeEditor, tabArea, editorConfig, modelDefinitions)
+        .then((editor) => {
+            Split([
+                `${codeEditor}-container`,
+                `${codeExecutor}-container`
+            ], {
+                direction: 'vertical'
+            })
 
-            const language = model.getLanguageIdentifier().language
-            const value = model.getValue()
-
-            setTimeout(() => {
-                execute(language, value)
-            }, 2000)
+            addOnDidChangeEventListener(editor)
+        }).catch(async (error) => {
+            await notify.send('error', error.message)
         })
-    }).catch((error) => {
-        console.log(error.message)
-    })
 })
+
+function addOnDidChangeEventListener(editor) {
+    editor.onDidChangeModelContent(() => {
+        const model = editor.getModel()
+        const language = model.getLanguageIdentifier().language
+        const value = model.getValue()
+
+        setTimeout(() => {
+            execute(language, value)
+        }, 2000)
+    })
+}
 
 let js = '', html = '', css = ''
 function execute(lang, content) {
-    let executor = document.querySelector('#code-executor')
+    let executor = document.querySelector(codeExecutor)
     css = '<style>body { background: #ffffff; }'
     if (lang === 'javascript') {
         js = '<script>' + content + '</script>'
