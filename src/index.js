@@ -1,4 +1,4 @@
-import impala from '@chrisrowles/impala'
+import impala from '@godeploy/impala'
 
 document.addEventListener('DOMContentLoaded', () => {
     impala.multicode('#code-editor', '#lang-tabs', {

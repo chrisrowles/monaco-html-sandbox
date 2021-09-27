@@ -1,0 +1,48 @@
+#sidebar {
+    min-width: 300px;
+    max-width: 300px;
+    background: #252526;
+    color: #eeeeee;
+    transition: all 0.3s;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+    clip-path: inset(0px -2px 0px 0px);
+
+    &.active {
+        margin-left: -250px;
+    }
+
+    .sidebar-header {
+        padding: 20px;
+        background: #252526;
+    }
+
+    ul {
+        &.components {
+            padding: 20px 0;
+            border-bottom: 1px solid #2b2b2b;
+        }
+
+        p {
+            color: #eeeeee;
+            padding: 10px;
+        }
+
+        li {
+            a {
+                padding: 10px;
+                font-size: 1.1em;
+                display: block;
+
+                &:hover {
+                    color: #ffffff;
+                    background: #333333;
+                }
+            }
+
+            &.active > a {
+                color: #fff;
+                background: #2b2b2b;
+            }
+        }
+    }
+}

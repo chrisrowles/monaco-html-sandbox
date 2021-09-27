@@ -1,0 +1,22 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'base';
+@import 'navigation';
+@import 'sidebar';
+@import 'mediaqueries';
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#code-executor {
+    background: #222222;
+}
