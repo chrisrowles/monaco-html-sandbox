@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Monaco Sandbox Example</title>
+    <meta name="description" content="A live sandbox editor based on Microsoft's monaco editor.">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Sandbox, Code, Microsoft, Monaco">
+    <meta name="author" content="Chris Rowles">
+    <meta property="og:title" content="Monaco Sandbox Example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://code.rowles.ch" />
+    <meta property="og:image" content="http://code.rowles.ch/screenshot.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css"
+          integrity="sha512-sVSECYdnRMezwuq5uAjKQJEcu2wybeAPjU4VJQ9pCRcCY4pIpIw4YMHIOQ0CypfwHRvdSPbH++dA3O4Hihm/LQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Monaco Sandbox</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="https://microsoft.github.io/monaco-editor/api/index.html">Monaco API</a>
+            </li>
+            <li>
+                <a href="https://microsoft.github.io/monaco-editor/playground.html">Monaco Playground</a>
+            </li>
+        </ul>
+        <ul class="list-unstyled subsection">
+            <li>
+                <a href="https://github.com/chrisrowles" class="article">Built with ❤️ by CR</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="content" class="d-flex flex-column">
+        <div class="d-flex flex-row tab-area">
+            <ul class="nav nav-tabs p-0 rounded-0 mr-auto" id="lang-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-lang="html">HTML</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-lang="css">CSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-lang="javascript">JS</a>
+                </li>
+            </ul>
+            <ul class="nav nav-tabs p-0 ml-auto">
+                <li class="nav-link social border-0">
+                    <a href="https://github.com/chrisrowles/monaco-sandbox">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="py-2 bg-dark"></div>
+        <div id="code-editor" class="h-50"></div>
+        <div class="py-2 bg-dark"></div>
+        <iframe id="code-executor" class="h-50 border-0"></iframe>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
