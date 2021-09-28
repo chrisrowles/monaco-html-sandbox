@@ -22,6 +22,7 @@
     "highlight.js": "^11.2.0",
     "markdown-it": "^12.2.0",
     "markdown-it-container": "^3.0.0",
+    "pug": "^3.0.2",
     "sequelize": "^6.6.5",
     "split.js": "^1.6.4",
     "sqlite3": "^5.0.2",

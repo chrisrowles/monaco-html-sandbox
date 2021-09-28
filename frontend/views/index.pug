@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    .wrapper(x-data='manager()')
+        include sidebar
+        #content(x-ref='content')
+            include tabs
+            .py-2.bg-dark
+            include sandbox

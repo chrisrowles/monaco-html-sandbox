@@ -6,17 +6,17 @@ const app = express()
 const db = require('./backend/models')
 db.connection.sync()
 
+app.set('views', path.join(__dirname, 'public'))
+app.set('view engine', 'pug')
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-})
-app.get('/:name', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-})
+// Frontend routes
+app.get('/', (req, res) => res.render('index'))
 
+// Backend routes
 require('./backend/routes/code.routes')(app)
 
 const port = process.env.PORT || 8080
