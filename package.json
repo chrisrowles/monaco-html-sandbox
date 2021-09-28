@@ -2,11 +2,10 @@
   "name": "editor",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
   "scripts": {
     "run": "node server.js",
     "build": "webpack --config webpack.config.js",
-    "copy:static": "copyfiles --flat ./src/index.html dist"
+    "copy:static": "copyfiles --flat frontend/index.html dist"
   },
   "author": "Chris Rowles <me@rowles.ch>",
   "license": "MIT",

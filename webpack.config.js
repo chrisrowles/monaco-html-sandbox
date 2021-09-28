@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     mode: 'production',
     entry: {
-        main: ['./src/index.js', './src/scss/index.scss']
+        main: ['./frontend/js/index.js', './frontend/scss/index.scss']
     },
     output: {
         publicPath: "",
@@ -42,7 +42,7 @@ module.exports = {
                 // Language workers scripts for monaco editor codelens, folding, error highlighting etc.
                 { from: 'node_modules/@godeploy/impala/*.worker.js', to: path.join(__dirname, 'public/assets/[name].js') },
                 // ...
-                { from: 'src/index.html', to: path.join(__dirname, 'public/') }
+                { from: 'frontend/index.html', to: path.join(__dirname, 'public/') }
             ]
         })
     ]
