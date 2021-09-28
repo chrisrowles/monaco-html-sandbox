@@ -1,5 +1,6 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 module.exports = {
     mode: 'production',
@@ -10,6 +11,10 @@ module.exports = {
         publicPath: "",
         path: path.join(__dirname, 'public/assets'),
         filename: 'main.js'
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserWebpackPlugin()]
     },
     module: {
         rules: [

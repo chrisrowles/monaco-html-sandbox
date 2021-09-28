@@ -44,15 +44,18 @@ exports.all = (req, res) => {
 }
 
 exports.single = (req, res) => {
-    const id = req.params.id
+    const condition = req.params.name
+        ? { name: req.params.name }
+        : null
 
-    Code.findByPk(id)
+    Code.findOne({ where: condition })
         .then(data => {
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || 'An unexpected error occurred'
+                message:
+                    err.message || 'An unexpected error occurred'
             })
         })
 }

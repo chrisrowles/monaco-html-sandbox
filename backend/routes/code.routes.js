@@ -4,7 +4,7 @@ module.exports = app => {
 
     router.post('/', code.create)
     router.get('/', code.all)
-    router.get('/:id', code.single)
+    router.get('/:name', code.single)
     router.delete('/:id', code.delete)
 
     app.use('/api/code', router)

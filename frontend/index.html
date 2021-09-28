@@ -39,7 +39,6 @@
         </ul>
     </nav>
     <div id="content" x-ref="content">
-        <!-- menu & tabs -->
         <div class="tab-area">
             <button class="btn btn-sm btn-dark border-0 rounded-0 px-4"
                     @click="collapse()">
@@ -64,15 +63,11 @@
                 </li>
             </ul>
         </div>
-        <!-- submenu -->
         <div class="py-2 bg-dark"></div>
-        <!-- content -->
         <div class="sandbox-area">
-            <!-- code editor area -->
             <div id="code-editor-container">
                 <div id="code-editor"></div>
             </div>
-            <!-- code output area -->
             <div id="code-executor-container">
                 <iframe id="code-executor"></iframe>
             </div>
