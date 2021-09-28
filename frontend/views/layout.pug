@@ -1,33 +1,6 @@
 doctype html
 html(lang='en')
-    head
-        meta(charset='UTF-8')
-        meta(name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
-        meta(http-equiv='X-UA-Compatible' content='ie=edge')
-        title Monaco Sandbox Example
-        meta(name='description' content="A live sandbox editor based on Microsoft's monaco editor.")
-        meta(name='keywords' content='HTML, CSS, JavaScript, Sandbox, Code, Microsoft, Monaco')
-        meta(name='author' content='Chris Rowles')
-        meta(property='og:title' content='Monaco Sandbox Example')
-        meta(property='og:type' content='website')
-        meta(property='og:url' content='http://code.rowles.ch')
-        meta(property='og:image' content='http://code.rowles.ch/screenshot.png')
-        link(rel='stylesheet' href='assets/main.css')
+    include head
     body
         block content
-        script(defer src='assets/main.js')
-        script.
-            function manager() {
-                return {
-                    sidebar: {
-                        expanded: true
-                    },
-                    collapse() {
-                        this.sidebar.expanded = !this.sidebar.expanded
-                        const sidebarWidth = 300
-                        this.$refs.content.style.width = this.sidebar.expanded
-                            ? 'calc(100% - ' + sidebarWidth + 'px)'
-                            : '100%'
-                    }
-                }
-            }
+        include script

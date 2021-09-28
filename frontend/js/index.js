@@ -33,6 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
             addOnChangeEventListener(editor)
             addOnSaveEventListener(editor)
 
+            const link = document.querySelector('#linked')
+            if (link && link.innerText !== '') {
+                api.fetchCode(link.innerText)
+                    .then((response) => {
+                        if (response.content) {
+                            editor.setValue(response.content)
+                        }
+                    })
+            }
+
             Alpine.start()
         }).catch(async (error) => {
             await notify.send('error', error.message)

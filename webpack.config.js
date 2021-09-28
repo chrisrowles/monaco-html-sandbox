@@ -46,7 +46,7 @@ module.exports = {
                 { from: 'node_modules/@godeploy/impala/*.ttf', to: path.join(__dirname, 'public/assets/[name].ttf') },
                 // Language workers scripts for monaco editor codelens, folding, error highlighting etc.
                 { from: 'node_modules/@godeploy/impala/*.worker.js', to: path.join(__dirname, 'public/assets/[name].js') },
-                // ...
+                // Pug views
                 { from: 'frontend/views/*.pug', to: path.join(__dirname, 'public/[name].pug') }
             ]
         })

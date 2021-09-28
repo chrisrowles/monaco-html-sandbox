@@ -14,7 +14,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
 
 // Frontend routes
-app.get('/', (req, res) => res.render('index'))
+app.get('/', (req, res) => {
+    return res.render('index')
+})
+
+app.get('/:name', (req, res) => {
+    return res.render('index', {
+        existing: true,
+        identifier: req.params.name
+    })
+})
 
 // Backend routes
 require('./backend/routes/code.routes')(app)

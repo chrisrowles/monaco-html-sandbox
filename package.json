@@ -5,7 +5,7 @@
   "scripts": {
     "run": "node server.js",
     "build:all": "webpack --config webpack.config.js",
-    "build:static": "copyfiles -f frontend/index.html public"
+    "build:static": "copyfiles -f frontend/views/*pug public"
   },
   "author": "Chris Rowles <me@rowles.ch>",
   "license": "MIT",

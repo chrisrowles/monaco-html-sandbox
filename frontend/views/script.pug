@@ -1,0 +1,16 @@
+script(defer src='assets/main.js')
+script.
+    function manager() {
+        return {
+            sidebar: {
+                expanded: true
+            },
+            collapse() {
+                this.sidebar.expanded = !this.sidebar.expanded
+                const sidebarWidth = 300
+                this.$refs.content.style.width = this.sidebar.expanded
+                    ? 'calc(100% - ' + sidebarWidth + 'px)'
+                    : '100%'
+            }
+        }
+    }
