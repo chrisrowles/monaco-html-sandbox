@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="wrapper" x-data="manager()">
-    <nav id="sidebar">
+    <nav id="sidebar" x-show="sidebar.expanded" x-transition>
         <div class="sidebar-header">
             <h3>Monaco Sandbox</h3>
         </div>
@@ -31,19 +31,20 @@
         </ul>
         <ul class="list-unstyled subsection">
             <li>
-                <button class="btn btn-dark w-100" @click.prevent="createShareableLink($editor.getModel())">
-                    Share
-                    <i class="ml-2 fas fa-share"></i>
-                </button>
+                <button class="btn btn-dark w-100" id="save-code">Share<i class="ml-2 fas fa-share"></i></button>
             </li>
             <li>
                 <a href="https://github.com/chrisrowles" class="article mt-3">Built with ❤️ by CR</a>
             </li>
         </ul>
     </nav>
-    <div id="content">
+    <div id="content" x-ref="content">
         <!-- menu & tabs -->
         <div class="tab-area">
+            <button class="btn btn-sm btn-dark border-0 rounded-0 px-4"
+                    @click="collapse()">
+                    <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav nav-tabs p-0 rounded-0 mr-auto" id="lang-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="#" data-lang="html">HTML</a>
@@ -78,29 +79,19 @@
         </div>
     </div>
 </div>
-<script src="assets/main.js"></script>
-<script defer src="https://unpkg.com/alpinejs@3.4.1/dist/cdn.min.js"></script>
+<script defer src="assets/main.js"></script>
 <script>
     function manager() {
         return {
-            content: '',
-            language: '',
-            createShareableLink(model) {
-                this.setCurrentModelContent(model.getValue())
-                this.setCurrentModelLanguage(model.getLanguageIdentifier().language)
-
-                $api.saveCode({
-                    content: this.content,
-                    language: this.language
-                }).then((response) => {
-                    console.log(response)
-                })
+            sidebar: {
+                expanded: true
             },
-            setCurrentModelLanguage(language) {
-                this.language = language
-            },
-            setCurrentModelContent(content) {
-                this.content = content
+            collapse() {
+                this.sidebar.expanded = !this.sidebar.expanded
+                const sidebarWidth = 300
+                this.$refs.content.style.width = this.sidebar.expanded
+                    ? 'calc(100% - ' + sidebarWidth + 'px)'
+                    : '100%'
             }
         }
     }

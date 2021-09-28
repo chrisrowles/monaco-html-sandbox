@@ -1,13 +1,14 @@
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faClipboard, faCode, faCog, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faShare } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@godeploy/impala'
 import Split from 'split.js'
+import Alpine from 'alpinejs'
 import notify from './notify'
 import api from './api'
 
-library.add(faClipboard, faCode, faCog, faGithub, faShare)
+library.add(faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faGithub, faShare)
 dom.watch()
 
 const tabArea = '#lang-tabs'
@@ -29,14 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
             window.$editor = editor
             window.$notify = notify
 
-            addOnDidChangeEventListener(editor)
+            addOnChangeEventListener(editor)
             addOnSaveEventListener(editor)
+
+            Alpine.start()
         }).catch(async (error) => {
             await notify.send('error', error.message)
         })
 })
 
-function addOnDidChangeEventListener(editor) {
+function addOnChangeEventListener(editor) {
     editor.onDidChangeModelContent(() => {
         const model = editor.getModel()
         const language = model.getLanguageIdentifier().language
