@@ -1,4 +1,4 @@
-const url = "https://monaco-sandbox.herokuapp.com/api"
+const url = 'https://monaco-sandbox.herokuapp.com/api'
 const api = {}
 
 api.fetchCodes = async () => {
