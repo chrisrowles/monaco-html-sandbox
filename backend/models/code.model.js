@@ -1,21 +1,24 @@
 module.exports = (sequelize, Sequelize) => {
     return sequelize.define('code', {
         name: {
+            allowNull: false,
+            unique: true,
             type: Sequelize.STRING
         },
         language: {
+            allowNull: false,
             type: Sequelize.STRING
         },
         content: {
+            allowNull: false,
             type: Sequelize.STRING
         },
         link: {
+            allowNull: false,
             type: Sequelize.STRING
         },
-        created_on: {
-            type: Sequelize.DATE
-        },
-        expires_on: {
+        expiresAt: {
+            allowNull: false,
             type: Sequelize.DATE
         }
     })
