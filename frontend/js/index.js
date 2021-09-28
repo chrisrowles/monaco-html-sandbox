@@ -6,7 +6,6 @@ import impala from '@godeploy/impala'
 import Split from 'split.js'
 import notify from './notify'
 import api from './api'
-import 'alpinejs'
 
 library.add(faClipboard, faCode, faCog, faGithub, faShare)
 dom.watch()
@@ -49,7 +48,7 @@ function addOnDidChangeEventListener(editor) {
     })
 }
 
-function addOnSaveEventListener(editor) {
+function addOnSaveEventListener() {
     const save = document.querySelector(saveButton)
 
     if (save) {

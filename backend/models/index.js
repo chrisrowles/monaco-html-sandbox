@@ -1,10 +1,9 @@
-// The application database is pretty much entirely instantiated from here
 const { Sequelize } = require('sequelize')
-// const config = require('../db.config')
+// const config = require('../db.config') // this is for mysql, cba to install it locally, so just use sqlite for now
 const path = require("path");
 
 // Create a new instance
-const sequelize = new Sequelize({
+const connection = new Sequelize({
     dialect: 'sqlite',
     storage: path.join(__dirname, '../storage/vscp.sqlite')
 })
@@ -12,9 +11,9 @@ const sequelize = new Sequelize({
 const db = {}
 
 db.Sequelize = Sequelize
-db.sequelize = sequelize
+db.connection = connection
 
 // Define database models
-db.code = require('./code.model')(sequelize, Sequelize)
+db.code = require('./code.model')(connection, Sequelize)
 
 module.exports = db

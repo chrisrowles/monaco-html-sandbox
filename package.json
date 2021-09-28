@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "run": "node server.js",
-    "build": "webpack --config webpack.config.js",
-    "copy:static": "copyfiles --flat frontend/index.html dist"
+    "build:all": "webpack --config webpack.config.js",
+    "build:static": "copyfiles -f frontend/index.html public"
   },
   "author": "Chris Rowles <me@rowles.ch>",
   "license": "MIT",
@@ -32,7 +32,6 @@
     "copyfiles": "^2.4.1",
     "css-loader": "^6.3.0",
     "file-loader": "^6.2.0",
-    "http-server": "^13.0.2",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "sequelize-cli": "^6.2.0",
