@@ -1,0 +1,12 @@
+#shareable.modal(tabindex='-1' aria-hidden='true')
+    .modal-dialog.mt-10
+        .modal-content
+            .modal-header
+                h5.modal-title Share your code!
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                .form-group
+                    label(for='shareable-link') Your link
+                    input#shareable-link.form-control(type='text' readonly disabled value aria-describedby='link-help')
+                    small#link-help.form-text.text-muted Lorem ipsum dolor sit amet.

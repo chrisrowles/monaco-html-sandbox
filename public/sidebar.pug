@@ -1,0 +1,15 @@
+nav#sidebar(x-show='sidebar.expanded' x-transition)
+    .sidebar-header
+        h3 Monaco Sandbox
+    ul.list-unstyled.components
+        li
+            a(href='https://microsoft.github.io/monaco-editor/api/index.html') Monaco API
+        li
+            a(href='https://microsoft.github.io/monaco-editor/playground.html') Monaco Playground
+    ul.list-unstyled.subsection
+        li
+            button#save-code.btn.btn-dark.w-100
+                | Get Share Link
+                i.ml-2.fas.fa-link
+        li
+            a.article.mt-3(href='https://github.com/chrisrowles') Built with ❤️ by CR
