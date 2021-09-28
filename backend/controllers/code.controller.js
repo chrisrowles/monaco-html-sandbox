@@ -3,19 +3,19 @@ const Code = db.code
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
-    if (!req.body.name) {
-        res.status(400).send({
-            message: 'Invalid Request'
-        })
+    const errors = []
+    const required = ['name', 'language', 'content']
+    required.forEach((key) => {
+        if (!req.body[key]) errors.push(key)
+    })
 
+    if (errors.length > 0) {
+        res.status(400).send({ message: 'Invalid Request. the following fields are required: ' + errors.join(',') })
         return
     }
 
-    const code = {
-        code: req.body.code
-    }
-
-    Code.create(code)
+    const record = req.body
+    Code.create(record)
         .then(data => {
             res.send(data)
         })

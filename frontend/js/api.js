@@ -11,7 +11,7 @@ api.fetchCode = async (id) => {
     return response.json()
 }
 
-api.createCode = async ({ language, content }) => {
+api.saveCode = async ({ language, content }) => {
     try {
         const name = (Math.random() + 1).toString(36).substring(2)
         const link = `http://localhost:8080/${name}`

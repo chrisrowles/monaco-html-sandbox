@@ -1,5 +1,5 @@
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faClipboard, faCode, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faClipboard, faCode, faCog, faShare } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@godeploy/impala'
@@ -8,11 +8,12 @@ import notify from './notify'
 import api from './api'
 import 'alpinejs'
 
-library.add(faClipboard, faCode, faCog, faGithub)
+library.add(faClipboard, faCode, faCog, faGithub, faShare)
 dom.watch()
 
-const codeEditor = '#code-editor'
 const tabArea = '#lang-tabs'
+const saveButton = '#save-code'
+const codeEditor = '#code-editor'
 const codeExecutor = '#code-executor'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,9 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
             window.$api = api
+            window.$editor = editor
             window.$notify = notify
 
             addOnDidChangeEventListener(editor)
+            addOnSaveEventListener(editor)
         }).catch(async (error) => {
             await notify.send('error', error.message)
         })
@@ -38,12 +41,32 @@ function addOnDidChangeEventListener(editor) {
     editor.onDidChangeModelContent(() => {
         const model = editor.getModel()
         const language = model.getLanguageIdentifier().language
-        const value = model.getValue()
+        const content = model.getValue()
 
         setTimeout(() => {
-            execute(language, value)
+            execute(language, content)
         }, 2000)
     })
+}
+
+function addOnSaveEventListener(editor) {
+    const save = document.querySelector(saveButton)
+
+    if (save) {
+        save.addEventListener('click', (event) => {
+            event.preventDefault()
+
+            api.saveCode({
+                language: $editor.getModel().getLanguageIdentifier().language,
+                content: $editor.getValue()
+            }).then((response) => {
+                console.log(response)
+            }).catch(async (error) => {
+                console.log(error)
+                await notify.send('error', 'Unable to save code.')
+            })
+        })
+    }
 }
 
 let js = '', html = '', css = ''
