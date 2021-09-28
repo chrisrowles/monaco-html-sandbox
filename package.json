@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "run": "node server.js",
+    "start": "node server.js",
     "build:all": "webpack --config webpack.config.js",
     "build:static": "copyfiles -f frontend/views/*pug public"
   },
