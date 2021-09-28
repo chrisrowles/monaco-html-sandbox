@@ -1,4 +1,4 @@
-nav#sidebar(x-show='sidebar.expanded' x-transition='')
+nav#sidebar(x-show='sidebar.expanded' x-transition)
     .sidebar-header
         h3 Monaco Sandbox
     ul.list-unstyled.components
@@ -9,7 +9,7 @@ nav#sidebar(x-show='sidebar.expanded' x-transition='')
     ul.list-unstyled.subsection
         li
             button#save-code.btn.btn-dark.w-100
-                | Share
-                i.ml-2.fas.fa-share
+                | Get Share Link
+                i.ml-2.fas.fa-link
         li
             a.article.mt-3(href='https://github.com/chrisrowles') Built with ❤️ by CR

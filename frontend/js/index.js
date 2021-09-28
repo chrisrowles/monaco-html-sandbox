@@ -1,5 +1,5 @@
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faLink, faShare } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@godeploy/impala'
@@ -8,7 +8,7 @@ import Alpine from 'alpinejs'
 import notify from './notify'
 import api from './api'
 
-library.add(faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faGithub, faShare)
+library.add(faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faGithub, faLink, faShare)
 dom.watch()
 
 const tabArea = '#lang-tabs'
@@ -72,12 +72,52 @@ function addOnSaveEventListener() {
                 language: $editor.getModel().getLanguageIdentifier().language,
                 content: $editor.getValue()
             }).then((response) => {
-                console.log(response)
+                toggleShareableLinkModal('#shareable', response.link)
             }).catch(async (error) => {
                 console.log(error)
                 await notify.send('error', 'Unable to save code.')
             })
         })
+    }
+}
+
+function toggleShareableLinkModal(id, link) {
+    const shareable = document.querySelector(`#shareable-link`)
+    if (link) {
+        shareable.value = link
+    }
+
+    const modal = document.querySelector(id)
+    const backdrop = document.querySelector('.backdrop')
+    if (modal) {
+        if (!modal.classList.contains('show')) {
+            if (backdrop) {
+                backdrop.classList.add('show')
+            }
+
+            const buttons = modal.querySelectorAll('button')
+            buttons.forEach((button) => {
+                if (Object.prototype.hasOwnProperty.call(button.dataset, 'dismiss')) {
+                    button.addEventListener('click', () => {
+                        modal.style.display = 'none'
+                        modal.classList.remove('show')
+                        if (backdrop) {
+                            backdrop.classList.remove('show')
+                        }
+                    })
+                }
+            })
+
+            modal.style.display = 'block'
+            modal.classList.add('show')
+        } else {
+            if (backdrop) {
+                backdrop.classList.remove('show')
+            }
+
+            modal.style.display = 'none'
+            modal.classList.remove('show')
+        }
     }
 }
 

@@ -84,3 +84,27 @@ a {
     width: 100%;
     align-items: stretch;
 }
+
+.modal-dialog {
+    background: #111111;
+}
+.modal-header {
+    border: none;
+}
+.modal-content {
+    background: #111111;
+    color: #eeeeee;
+    border: none;
+
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #2b2b2b;
+        color: white;
+        opacity: 1;
+        border: 1px solid #2b2b2b;
+    }
+}
+
+.mt-10 {
+    margin-top: 10rem !important;
+}

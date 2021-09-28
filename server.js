@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
 
 app.get('/:name', (req, res) => {
     return res.render('index', {
-        existing: true,
         identifier: req.params.name
     })
 })
