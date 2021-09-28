@@ -15,6 +15,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@godeploy/impala": "file:../impala/impala-v2/dist",
+    "alpinejs": "^3.4.1",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

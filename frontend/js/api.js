@@ -7,7 +7,6 @@ api.fetchCodes = async () => {
 }
 
 api.fetchCode = async (id) => {
-    console.log(id)
     const response = await fetch(`${url}/code/${id}`)
     return response.json()
 }

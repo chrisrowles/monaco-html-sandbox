@@ -3,8 +3,10 @@ import { faClipboard, faCode, faCog } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@godeploy/impala'
-import notify from './notify'
 import Split from 'split.js'
+import notify from './notify'
+import api from './api'
+import 'alpinejs'
 
 library.add(faClipboard, faCode, faCog, faGithub)
 dom.watch()
@@ -22,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ], {
                 direction: 'vertical'
             })
+
+            window.$api = api
+            window.$notify = notify
 
             addOnDidChangeEventListener(editor)
         }).catch(async (error) => {
@@ -61,3 +66,21 @@ function execute(lang, content) {
     executor.document.write(html + css + js)
     executor.document.close()
 }
+
+self.MonacoEnvironment = {
+    getWorkerUrl: function (moduleId, label) {
+        if (label === 'json') {
+            return 'assets/json.worker.js'
+        }
+
+        if (label === 'css') {
+            return 'assets/css.worker.js'
+        }
+
+        if (label === 'html') {
+            return 'assets/html.worker.js'
+        }
+
+        return 'assets/editor.worker.js'
+    }
+};
