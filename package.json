@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "run": "http-server ./dist",
+    "run": "node server.js",
     "build": "webpack --config webpack.config.js",
     "copy:static": "copyfiles --flat ./src/index.html dist"
   },
@@ -17,10 +17,14 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@godeploy/impala": "file:../impala/impala-v2/dist",
     "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "highlight.js": "^11.2.0",
     "markdown-it": "^12.2.0",
     "markdown-it-container": "^3.0.0",
+    "sequelize": "^6.6.5",
     "split.js": "^1.6.4",
+    "sqlite3": "^5.0.2",
     "sweetalert2": "^11.1.7"
   },
   "devDependencies": {
@@ -31,6 +35,7 @@
     "http-server": "^13.0.2",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
+    "sequelize-cli": "^6.2.0",
     "style-loader": "^3.3.0",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"

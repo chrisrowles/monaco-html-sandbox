@@ -8,7 +8,7 @@ module.exports = {
     },
     output: {
         publicPath: "",
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'public/assets'),
         filename: 'main.js'
     },
     module: {
@@ -38,11 +38,11 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 // Codicons font file for monaco editor icons
-                { from: 'node_modules/@godeploy/impala/*.ttf', to: path.join(__dirname, 'dist/[name].ttf') },
+                { from: 'node_modules/@godeploy/impala/*.ttf', to: path.join(__dirname, 'public/assets/[name].ttf') },
                 // Language workers scripts for monaco editor codelens, folding, error highlighting etc.
-                { from: 'node_modules/@godeploy/impala/*.worker.js', to: path.join(__dirname, 'dist/[name].js') },
+                { from: 'node_modules/@godeploy/impala/*.worker.js', to: path.join(__dirname, 'public/assets/[name].js') },
                 // ...
-                { from: 'src/index.html', to: path.join(__dirname, 'dist/') }
+                { from: 'src/index.html', to: path.join(__dirname, 'public/') }
             ]
         })
     ]
