@@ -28,4 +28,4 @@ app.get('/:name', (req, res) => {
 require('./backend/routes/code.routes')(app)
 
 const port = process.env.PORT || 8080
-app.listen(port, () => console.log(`Server is up...\nhttp://localhost:8080\n\n`))
+app.listen(port, () => console.log(`Server is up...\nhttps://monaco-sandbox.herokuapp.com\n\n`))

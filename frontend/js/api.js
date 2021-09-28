@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api"
+const url = "https://monaco-sandbox.herokuapp.com/api"
 const api = {}
 
 api.fetchCodes = async () => {
@@ -14,7 +14,7 @@ api.fetchCode = async (id) => {
 api.saveCode = async ({ language, content }) => {
     try {
         const name = (Math.random() + 1).toString(36).substring(2)
-        const link = `http://localhost:8080/${name}`
+        const link = `https://monaco-sandbox.herokuapp.com/${name}`
         const expiresAt = new Date(new Date().getTime() + (24 * 60 * 60 * 1000))
             .toISOString()
             .slice(0, 19)
