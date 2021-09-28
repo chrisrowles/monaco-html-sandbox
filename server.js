@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const path = require('path')
 const express = require('express')
 
@@ -27,5 +29,6 @@ app.get('/:name', (req, res) => {
 // Backend routes
 require('./backend/routes/code.routes')(app)
 
-const port = process.env.PORT || 80
-app.listen(port, () => console.log(`Server is up...\nhttps://monaco-sandbox.herokuapp.com\n\n`))
+const port = process.env.APP_PORT || 80
+const url = process.env.APP_URL
+app.listen(port, () => console.log(`Server is up...\n${url}\n\n`))
