@@ -1,6 +1,7 @@
 nav#sidebar(x-show='sidebar.expanded' x-transition)
-    .sidebar-header
-        h3 Monaco Sandbox
+    .sidebar-header.d-flex.flex-row.align-items-center
+        img#logo(src='assets/code.png' class='img-fluid')
+        h3.ml-3 Monaco Sandbox
     ul.list-unstyled.components
         li
             a(href='https://microsoft.github.io/monaco-editor/api/index.html') Monaco API

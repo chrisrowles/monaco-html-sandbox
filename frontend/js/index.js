@@ -66,7 +66,7 @@ function addEditorOnSaveEventListener() {
 
             api.saveCode({ content })
                 .then((response) => {
-                    toggleShareableLinkModal(shareableModal, response.link)
+                    displayShareableLink(shareableModal, response.link)
                 }).catch(async (error) => {
                     await notify.send('error', error.message)
                 })
@@ -96,7 +96,7 @@ function setEditorModelsFromExistingLink() {
     }
 }
 
-function toggleShareableLinkModal(id, link) {
+function displayShareableLink(id, link) {
     shareableLink.value = link
     if (shareableModal) {
         if (!shareableModal.classList.contains('show')) {
