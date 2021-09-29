@@ -31,9 +31,13 @@
     .nav-tabs {
         .nav-link {
             color: #eeeeee !important;
-            border-left: 1px solid #2c2c32;
-            background: #42424d !important;
-            &.active, &.social {
+            border-left: 1px solid #42424a;
+            background: #575765 !important;
+            &.social {
+                border-color: #575765 !important;
+                background: #575765 !important;
+            }
+            &.active, {
                 color: #ffffff !important;
                 border-color: #2c2c32 !important;
                 background: #2c2c32 !important;
