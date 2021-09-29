@@ -15,6 +15,7 @@ const tabArea = '#lang-tabs'
 const saveButton = '#save-code'
 const codeEditor = '#code-editor'
 const codeExecutor = '#code-executor'
+const codeExecutorTimeout = 2000
 
 document.addEventListener('DOMContentLoaded', () => {
     impala.multicode(codeEditor, tabArea, editorConfig, modelDefinitions)
@@ -32,16 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             addOnChangeEventListener(editor)
             addOnSaveEventListener(editor)
-
-            const link = document.querySelector('#linked')
-            if (link && link.innerText !== '') {
-                api.fetchCode(link.innerText)
-                    .then((response) => {
-                        if (response.content) {
-                            editor.setValue(response.content)
-                        }
-                    })
-            }
+            fetchExistingCodeFromLink(editor)
 
             Alpine.start()
         }).catch(async (error) => {
@@ -49,21 +41,39 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 })
 
+function fetchExistingCodeFromLink(editor) {
+    const link = document.querySelector('#linked')
+    if (link && link.innerText !== '') {
+        api.fetchCode(link.innerText)
+            .then((response) => {
+                if (response.content) {
+                    editor.setValue(response.content)
+                }
+            })
+            .catch(async (error) => {
+                await notify.send('error', error.message)
+            })
+    }
+}
+
 function addOnChangeEventListener(editor) {
     editor.onDidChangeModelContent(() => {
         const model = editor.getModel()
         const language = model.getLanguageIdentifier().language
         const content = model.getValue()
 
+
         setTimeout(() => {
             execute(language, content)
-        }, 2000)
+                .catch(async (error) => {
+                    await notify.send('error', error.message)
+                })
+        }, codeExecutorTimeout)
     })
 }
 
 function addOnSaveEventListener() {
     const save = document.querySelector(saveButton)
-
     if (save) {
         save.addEventListener('click', (event) => {
             event.preventDefault()
@@ -121,7 +131,7 @@ function toggleShareableLinkModal(id, link) {
 }
 
 let js = '', html = '', css = ''
-function execute(lang, content) {
+async function execute(lang, content) {
     let executor = document.querySelector(codeExecutor)
     css = '<style>body { background: #ffffff; }'
     if (lang === 'javascript') {
@@ -130,6 +140,8 @@ function execute(lang, content) {
         css += content + '</style>'
     } else if (lang === 'html') {
         html = content
+    } else {
+        throw new Error('Invalid submission detected.')
     }
 
     executor = executor.contentWindow

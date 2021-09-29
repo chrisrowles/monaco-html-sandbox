@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     })
 
     if (errors.length > 0) {
-        res.status(400).send({ message: 'Invalid Request. the following fields are required: ' + errors.join(',') })
+        res.status(400).send({ message: 'Unable to save. the following is required: ' + errors.join(',') })
         return
     }
 
@@ -33,6 +33,12 @@ exports.all = (req, res) => {
 
     Code.findAll({ where: condition })
         .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: 'No codes found.'
+                })
+            }
+
             res.send(data)
         })
         .catch(err => {
@@ -50,28 +56,34 @@ exports.single = (req, res) => {
 
     Code.findOne({ where: condition })
         .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: 'Code not found.'
+                })
+            }
+
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || 'An unexpected error occurred'
+                    err.message || 'An unexpected error occurred.'
             })
         })
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.id
+    const name = req.params.name
 
-    Code.destroy({ where: { id: id } })
+    Code.destroy({ where: { name } })
         .then(result => {
             if (result === 1) {
                 res.send({
-                    message: 'User successfully deleted'
+                    message: 'Code successfully deleted.'
                 })
             } else {
                 res.send({
-                    message: `Error deleting user ${id}`
+                    message: `Error deleting code ${name}`
                 })
             }
         })
