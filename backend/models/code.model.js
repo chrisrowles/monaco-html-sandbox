@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         content: {
             allowNull: false,
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT('long')
         },
         link: {
             allowNull: false,
