@@ -1,43 +1,48 @@
 [data-theme="vs"] {
     .tab-area {
-        background: #ef6d5a !important;
+        background: #42424d !important;
         color: #ffffff !important;
     }
 
     .bg-dark {
-        background: #ff553c !important;
+        background: #2c2c32 !important;
     }
 
     .btn-dark {
         color: #ffffff !important;
-        background-color: #f26651 !important;
-        border-color: #f26651 !important;
+        background-color: #42424d !important;
+        border-color: #42424d !important;
+    }
+
+    .toggler {
+        background-color: #42424d !important;
+        border-color: #42424d !important;
     }
 
     a.article {
+        background: #2c2c32 !important;
+        color: #ffffff !important;
         &:hover {
-            background: #ef6d5a !important;
+            background: #42424d !important;
             color: #ffffff !important;
         }
-        background: #f26651 !important;
-        color: #ffffff !important;
     }
 
     .nav-tabs {
         .nav-link {
             color: #eeeeee !important;
-            border: 1px solid #f26651 !important;
-            background: #f26651 !important;
+            border-left: 1px solid #2c2c32;
+            background: #42424d !important;
             &.active, &.social {
                 color: #ffffff !important;
-                border: 1px solid #ef6d5a !important;
-                background: #ef6d5a !important;
+                border-color: #2c2c32 !important;
+                background: #2c2c32 !important;
             }
         }
     }
 
     .gutter {
-        background-color: #ef6d5a !important;
+        background-color: #42424d !important;
         background-repeat: no-repeat !important;
         background-position: 50% !important;
     }
@@ -47,10 +52,10 @@
     }
 
     .modal-dialog {
-        background: #f26651 !important;
+        background: #2c2c32 !important;
 
         .modal-content {
-            background: #f26651 !important;
+            background: #2c2c32 !important;
         }
     }
     .modal-content .form-control:disabled, .modal-content .form-control[readonly] {
@@ -60,7 +65,7 @@
     }
     .input-group-append .input-group-text {
         background-color: #eeeeee !important;
-        border: #f26651 !important;
+        border-color: #2c2c32 !important;
     }
     .text-warning {
         color: #ffffff !important;
@@ -75,21 +80,21 @@
         color: #aaaaaa !important;
     }
     #sidebar {
-        background: #f26651 !important;
+        background: #2c2c32 !important;
         color: #eeeeee !important;
 
         .sidebar-header {
-            background: #f26651 !important;
+            background: #2c2c32 !important;
             color: #eeeeee !important;
         }
 
         ul li a:hover {
             color: #ffffff !important;
-            background: #ef6d5a !important;
+            background: #42424d !important;
         }
 
         ul.components {
-            border-bottom: 1px solid #ef6d5a !important;
+            border-bottom: 1px solid #2c2c32 !important;
         }
     }
 

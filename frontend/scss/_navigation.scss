@@ -16,6 +16,11 @@
     flex: 1 1 auto !important;
 }
 
+.toggler {
+    background: #222222;
+    color: #eeeeee;
+}
+
 .nav-tabs {
     border-bottom: 1px solid #222222;
 
@@ -36,7 +41,7 @@
         }
 
         &.social {
-            background: #222222;
+            background: #2b2b2b;
             padding-left: .5em;
             padding-right: .5em;
             border: none;
@@ -51,9 +56,9 @@
         }
 
         &.active {
-            color: #dddddd;
-            border: 1px solid #222222 !important;
-            background: #222222;
+            color: #eeeeee;
+            border: 1px solid #1a1a1a;
+            background: #1a1a1a;
             box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
         }
     }
