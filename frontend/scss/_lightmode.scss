@@ -42,6 +42,38 @@
         background-position: 50% !important;
     }
 
+    .backdrop {
+        background: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .modal-dialog {
+        background: #f26651 !important;
+
+        .modal-content {
+            background: #f26651 !important;
+        }
+    }
+    .modal-content .form-control:disabled, .modal-content .form-control[readonly] {
+        background-color: #eeeeee !important;
+        color: #000000 !important;
+        border: none !important;
+    }
+    .input-group-append .input-group-text {
+        background-color: #eeeeee !important;
+        border: #f26651 !important;
+    }
+    .text-warning {
+        color: #ffffff !important;
+    }
+    .close {
+        color: #ffffff !important;
+    }
+    .green {
+        color: #008000 !important;
+    }
+    #copy-icon {
+        color: #aaaaaa !important;
+    }
     #sidebar {
         background: #f26651 !important;
         color: #eeeeee !important;

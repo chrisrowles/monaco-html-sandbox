@@ -162,11 +162,11 @@ function copyShareableLinkToClipboard() {
         document.execCommand('copy')
         const svg = document.querySelector('svg#copy-icon')
         svg.dataset.icon = 'check'
-        svg.style.color = '#008000'
+        svg.classList.add('green')
         setTimeout(() => {
             const svg = document.querySelector('svg#copy-icon')
             svg.dataset.icon = 'clipboard'
-            svg.style.color = '#EEEEEE'
+            svg.classList.remove('green')
         }, 1500)
     }
 }
