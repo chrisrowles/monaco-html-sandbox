@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 direction: 'vertical'
             })
 
-            window.$api = api
-            window.$editor = editor
-            window.$notify = notify
-
             addOnChangeEventListener(editor)
             addOnSaveEventListener(editor)
             fetchExistingCodeFromLink(editor)
+
+            window.$api = api
+            window.$editor = editor
+            window.$notify = notify
 
             Alpine.start()
         }).catch(async (error) => {
@@ -72,15 +72,15 @@ function addOnChangeEventListener(editor) {
     })
 }
 
-function addOnSaveEventListener() {
+function addOnSaveEventListener(editor) {
     const save = document.querySelector(saveButton)
     if (save) {
         save.addEventListener('click', (event) => {
             event.preventDefault()
 
             api.saveCode({
-                language: $editor.getModel().getLanguageIdentifier().language,
-                content: $editor.getValue()
+                language: editor.getModel().getLanguageIdentifier().language,
+                content: editor.getValue()
             }).then((response) => {
                 toggleShareableLinkModal('#shareable', response.link)
             }).catch(async (error) => {
