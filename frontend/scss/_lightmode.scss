@@ -1,0 +1,67 @@
+[data-theme="vs"] {
+    .tab-area {
+        background: #ef6d5a !important;
+        color: #ffffff !important;
+    }
+
+    .bg-dark {
+        background: #ff553c !important;
+    }
+
+    .btn-dark {
+        color: #ffffff !important;
+        background-color: #f26651 !important;
+        border-color: #f26651 !important;
+    }
+
+    a.article {
+        &:hover {
+            background: #ef6d5a !important;
+            color: #ffffff !important;
+        }
+        background: #f26651 !important;
+        color: #ffffff !important;
+    }
+
+    .nav-tabs {
+        .nav-link {
+            color: #eeeeee !important;
+            border: 1px solid #f26651 !important;
+            background: #f26651 !important;
+            &.active, &.social {
+                color: #ffffff !important;
+                border: 1px solid #ef6d5a !important;
+                background: #ef6d5a !important;
+            }
+        }
+    }
+
+    .gutter {
+        background-color: #ef6d5a !important;
+        background-repeat: no-repeat !important;
+        background-position: 50% !important;
+    }
+
+    #sidebar {
+        background: #f26651 !important;
+        color: #eeeeee !important;
+
+        .sidebar-header {
+            background: #f26651 !important;
+            color: #eeeeee !important;
+        }
+
+        ul li a:hover {
+            color: #ffffff !important;
+            background: #ef6d5a !important;
+        }
+
+        ul.components {
+            border-bottom: 1px solid #ef6d5a !important;
+        }
+    }
+
+    #code-executor {
+        background: #eeeeee !important;
+    }
+}

@@ -1,15 +1,10 @@
-import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faCheck, faClipboard, faCode, faExpandArrowsAlt, faLink, faShare, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import './icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@chrisrowles/impala'
 import Split from 'split.js'
 import Alpine from 'alpinejs'
 import notify from './notify'
 import api from './api'
-
-library.add(faBars, faCheck, faClipboard, faCode, faExpandArrowsAlt, faGithub, faLink, faShare, faTimes)
-dom.watch()
 
 const tabArea = '#lang-tabs'
 const saveButton = '#save-code'
@@ -34,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
             addEditorOnChangeEventListener(editor)
+            addEditorOnChangeThemeEventListener()
             addEditorOnSaveEventListener()
             setEditorModelsFromExistingLink()
 
@@ -49,6 +45,30 @@ function addEditorOnChangeEventListener(editor) {
             executeEditorModelsContent()
         }, codeExecutorTimeout)
     })
+}
+
+function addEditorOnChangeThemeEventListener() {
+    const toggler = document.querySelector('#toggle-theme')
+    if (toggler) {
+        toggler.addEventListener('click', (event) => {
+            let target = event.target
+            if (target.nodeName === 'svg') {
+                target = target.parentElement
+            } else if (target.nodeName === 'path') {
+                target = target.parentElement.parentElement
+            }
+
+            if (Object.prototype.hasOwnProperty.call(target.dataset, 'theme')) {
+                let theme = (target.dataset.theme === 'vs') ? 'vs-dark' : 'vs'
+                impala.root.setTheme(theme)
+                target.dataset.theme = theme
+                const body = document.querySelector('body')
+                if (Object.prototype.hasOwnProperty.call(body.dataset, 'theme')) {
+                    body.dataset.theme = theme
+                }
+            }
+        })
+    }
 }
 
 function addEditorOnSaveEventListener() {

@@ -1,14 +1,7 @@
 const { Sequelize } = require('sequelize')
 const config = require('../db.config')
 
-// sqlite3
-// const path = require('path')
-// const connection = new Sequelize({
-//     dialect: 'sqlite',
-//     storage: path.join(__dirname, '../storage/vscp.sqlite')
-// })
-
-// postgres
+// Postgres connection
 const connection = new Sequelize(config)
 
 const db = {}
@@ -16,7 +9,7 @@ const db = {}
 db.Sequelize = Sequelize
 db.connection = connection
 
-// Define database models
+// Models
 db.code = require('./code.model')(connection, Sequelize)
 
 module.exports = db
