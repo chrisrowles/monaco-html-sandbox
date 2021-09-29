@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    .backdrop.d-none
     .wrapper(x-data='manager()')
         include sidebar
         #content(x-ref='content')

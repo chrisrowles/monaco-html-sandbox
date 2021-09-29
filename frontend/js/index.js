@@ -74,8 +74,7 @@ function addOnSaveEventListener() {
             }).then((response) => {
                 toggleShareableLinkModal('#shareable', response.link)
             }).catch(async (error) => {
-                console.log(error)
-                await notify.send('error', 'Unable to save code.')
+                await notify.send('error', error.message)
             })
         })
     }
