@@ -8,5 +8,9 @@
             .modal-body
                 .form-group
                     label(for='shareable-link') Your link
-                    input#shareable-link.form-control(type='text' readonly disabled value aria-describedby='link-help')
+                    .input-group
+                        input#shareable-link.form-control(type='text' readonly value aria-describedby='link-help')
+                        .input-group-append#copy-button
+                            span.input-group-text
+                                i#copy-icon.fa.fa-clipboard
                     small#link-help.form-text.text-warning.mt-2 Please note, anybody with this link will be able to see your code.

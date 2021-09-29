@@ -114,6 +114,17 @@ a {
     background: rgba(0,0,0,0.75);
 }
 
+.input-group-append {
+    .input-group-text {
+        background-color: #2b2b2b;
+        border: #2b2b2b;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .mt-10 {
     margin-top: 10rem !important;
 }

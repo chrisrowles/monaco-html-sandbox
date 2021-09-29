@@ -1,5 +1,5 @@
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faLink, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCheck, faClipboard, faCode, faExpandArrowsAlt, faLink, faShare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { editorConfig, modelDefinitions } from './config'
 import impala from '@chrisrowles/impala'
@@ -8,7 +8,7 @@ import Alpine from 'alpinejs'
 import notify from './notify'
 import api from './api'
 
-library.add(faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faGithub, faLink, faShare)
+library.add(faBars, faCheck, faClipboard, faCode, faExpandArrowsAlt, faGithub, faLink, faShare, faTimes)
 dom.watch()
 
 const tabArea = '#lang-tabs'
@@ -16,6 +16,12 @@ const saveButton = '#save-code'
 const codeEditor = '#code-editor'
 const codeExecutor = '#code-executor'
 const codeExecutorTimeout = 2000
+
+const isLinked = document.querySelector('#linked')
+const shareableBackdrop = document.querySelector('.backdrop')
+const shareableModal = document.querySelector('#shareable')
+const shareableLink = document.querySelector(`#shareable-link`)
+const shareableCopy = document.querySelector(`#copy-button`)
 
 document.addEventListener('DOMContentLoaded', () => {
     impala.multicode(codeEditor, tabArea, editorConfig, modelDefinitions)
@@ -60,7 +66,7 @@ function addEditorOnSaveEventListener() {
 
             api.saveCode({ content })
                 .then((response) => {
-                    toggleShareableLinkModal('#shareable', response.link)
+                    toggleShareableLinkModal(shareableModal, response.link)
                 }).catch(async (error) => {
                     await notify.send('error', error.message)
                 })
@@ -69,9 +75,8 @@ function addEditorOnSaveEventListener() {
 }
 
 function setEditorModelsFromExistingLink() {
-    const link = document.querySelector('#linked')
-    if (link && link.innerText !== '') {
-        api.fetchCode(link.innerText)
+    if (isLinked && isLinked.innerText !== '') {
+        api.fetchCode(isLinked.innerText)
             .then((response) => {
                 if (response.content) {
                     for (const [key, value] of Object.entries(response.content)) {
@@ -92,46 +97,60 @@ function setEditorModelsFromExistingLink() {
 }
 
 function toggleShareableLinkModal(id, link) {
-    const shareable = document.querySelector(`#shareable-link`)
-    if (link) {
-        shareable.value = link
-    }
-
-    const modal = document.querySelector(id)
-    const backdrop = document.querySelector('.backdrop')
-    if (modal) {
-        if (!modal.classList.contains('show')) {
-            if (backdrop) {
-                backdrop.classList.add('show')
+    shareableLink.value = link
+    if (shareableModal) {
+        if (!shareableModal.classList.contains('show')) {
+            if (shareableBackdrop) {
+                shareableBackdrop.classList.add('show')
             }
 
-            const buttons = modal.querySelectorAll('button')
+            const buttons = shareableModal.querySelectorAll('button')
             buttons.forEach((button) => {
                 if (Object.prototype.hasOwnProperty.call(button.dataset, 'dismiss')) {
                     button.addEventListener('click', () => {
-                        modal.style.display = 'none'
-                        modal.classList.remove('show')
-                        if (backdrop) {
-                            backdrop.classList.remove('show')
+                        shareableModal.style.display = 'none'
+                        shareableModal.classList.remove('show')
+                        if (shareableBackdrop) {
+                            shareableBackdrop.classList.remove('show')
                         }
                     })
                 }
             })
 
-            modal.style.display = 'block'
-            modal.classList.add('show')
+            shareableCopy.addEventListener('click', () => {
+                copyShareableLinkToClipboard()
+            })
+
+            shareableModal.style.display = 'block'
+            shareableModal.classList.add('show')
         } else {
-            if (backdrop) {
-                backdrop.classList.remove('show')
+            if (shareableBackdrop) {
+                shareableBackdrop.classList.remove('show')
             }
 
-            modal.style.display = 'none'
-            modal.classList.remove('show')
+            shareableModal.style.display = 'none'
+            shareableModal.classList.remove('show')
         }
     }
 }
 
-// TODO bug, sometimes script goes inside the style tag.
+function copyShareableLinkToClipboard() {
+    if (shareableLink && shareableLink.value !== '') {
+        shareableLink.focus()
+        shareableLink.select()
+
+        document.execCommand('copy')
+        const svg = document.querySelector('svg#copy-icon')
+        svg.dataset.icon = 'check'
+        svg.style.color = '#008000'
+        setTimeout(() => {
+            const svg = document.querySelector('svg#copy-icon')
+            svg.dataset.icon = 'clipboard'
+            svg.style.color = '#EEEEEE'
+        }, 1500)
+    }
+}
+
 function executeEditorModelsContent() {
     const content = {css: 'body { background: #ffffff; }', html: '', javascript: ''}
     const models = impala.root.getModels()
@@ -150,7 +169,8 @@ function executeEditorModelsContent() {
         || executor.contentDocument
 
     executor.document.head.innerHTML = `<style>${content.css}</style>`
-    executor.document.body.innerHTML = `${content.html}<script type="text/javascript" defer>${content.javascript}</script>`
+    executor.document.body.innerHTML = `${content.html}`
+    executor.document.body.innerHTML += `<script>${content.javascript}<\/script>`
     executor.document.close()
 }
 
