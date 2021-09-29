@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
     mode: 'production',
@@ -14,7 +17,7 @@ module.exports = {
     },
     optimization: {
         minimize: true,
-        minimizer: [new TerserWebpackPlugin()]
+        minimizer: [new TerserPlugin()]
     },
     module: {
         rules: [
@@ -40,7 +43,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin({
+        new CopyPlugin({
             patterns: [
                 // Codicons font file for monaco editor icons
                 { from: 'node_modules/@chrisrowles/impala/*.ttf', to: path.join(__dirname, 'public/assets/[name].ttf') },
@@ -49,6 +52,9 @@ module.exports = {
                 // Pug views
                 { from: 'frontend/views/*.pug', to: path.join(__dirname, 'public/[name].pug') }
             ]
+        }),
+        new webpack.DefinePlugin({
+            'process.env.APP_URL': JSON.stringify(process.env.APP_URL)
         })
     ]
 }

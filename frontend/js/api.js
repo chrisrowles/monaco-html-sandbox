@@ -1,4 +1,4 @@
-const url = 'https://monaco-sandbox.herokuapp.com/api'
+const url = `${process.env.APP_URL}/api`
 const api = {}
 
 api.fetchCodes = async () => {
@@ -14,7 +14,7 @@ api.fetchCode = async (id) => {
 api.saveCode = async ({ language, content }) => {
     try {
         const name = (Math.random() + 1).toString(36).substring(2)
-        const link = `https://monaco-sandbox.herokuapp.com/${name}`
+        const link = `${process.env.APP_URL}/${name}`
         const expiresAt = new Date(new Date().getTime() + (24 * 60 * 60 * 1000))
             .toISOString()
             .slice(0, 19)
