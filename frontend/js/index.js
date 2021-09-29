@@ -1,7 +1,7 @@
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faBars, faClipboard, faCode, faCog, faExpandArrowsAlt, faLink, faShare } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { editorConfig, modelDefinitions } from './config'
+import { editorConfig, modelDefinitions, modelMappings } from './config'
 import impala from '@chrisrowles/impala'
 import Split from 'split.js'
 import Alpine from 'alpinejs'
@@ -16,6 +16,7 @@ const saveButton = '#save-code'
 const codeEditor = '#code-editor'
 const codeExecutor = '#code-executor'
 const codeExecutorTimeout = 2000
+let js = '', html = '', css = ''
 
 document.addEventListener('DOMContentLoaded', () => {
     impala.multicode(codeEditor, tabArea, editorConfig, modelDefinitions)
@@ -31,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             addOnSaveEventListener(editor)
             fetchExistingCodeFromLink(editor)
 
-            window.$api = api
+            window.impala = impala
             window.$editor = editor
+            window.$api = api
             window.$notify = notify
 
             Alpine.start()
@@ -47,7 +49,15 @@ function fetchExistingCodeFromLink(editor) {
         api.fetchCode(link.innerText)
             .then((response) => {
                 if (response.content) {
-                    editor.setValue(response.content)
+                    for (const [key, value] of Object.entries(response.content)) {
+                        const models = impala.root.getModels()
+                        models.forEach((model) => {
+                            const language = model.getLanguageIdentifier().language
+                            if (language === key) {
+                                model.setValue(value)
+                            }
+                        })
+                    }
                 }
             })
             .catch(async (error) => {
@@ -79,8 +89,7 @@ function addOnSaveEventListener(editor) {
             event.preventDefault()
 
             api.saveCode({
-                language: editor.getModel().getLanguageIdentifier().language,
-                content: editor.getValue()
+                content: getModelsContent()
             }).then((response) => {
                 toggleShareableLinkModal('#shareable', response.link)
             }).catch(async (error) => {
@@ -88,6 +97,17 @@ function addOnSaveEventListener(editor) {
             })
         })
     }
+}
+
+function getModelsContent() {
+    let content = {css: '', html: '', javascript: ''}
+    const models = impala.root.getModels()
+    models.forEach((model) => {
+        let lang = model.getLanguageIdentifier().language
+        content[lang] = model.getValue()
+    })
+
+    return content
 }
 
 function toggleShareableLinkModal(id, link) {
@@ -130,14 +150,36 @@ function toggleShareableLinkModal(id, link) {
     }
 }
 
-let js = '', html = '', css = ''
+// TODO bug, sometimes the script goes inside the style tag.
+// async function execute(lang, content) {
+//     let executor = document.querySelector(codeExecutor)
+//     css = '<style>body { background: #ffffff; }'
+//     if (lang === 'javascript') {
+//         js = '<script>' + content + '</script>'
+//     } else if(lang === 'css') {
+//         css += content + '</style>'
+//     } else if (lang === 'html') {
+//         html = content
+//     } else {
+//         throw new Error('Invalid submission detected.')
+//     }
+//
+//     executor = executor.contentWindow
+//         || executor.contentDocument.document
+//         || executor.contentDocument
+//
+//     executor.document.open()
+//     executor.document.write(html + css + js)
+//     executor.document.close()
+// }
+
 async function execute(lang, content) {
     let executor = document.querySelector(codeExecutor)
-    css = '<style>body { background: #ffffff; }'
+    css = 'body { background: #ffffff; }'
     if (lang === 'javascript') {
-        js = '<script>' + content + '</script>'
+        js = content
     } else if(lang === 'css') {
-        css += content + '</style>'
+        css += content
     } else if (lang === 'html') {
         html = content
     } else {
@@ -148,8 +190,8 @@ async function execute(lang, content) {
         || executor.contentDocument.document
         || executor.contentDocument
 
-    executor.document.open()
-    executor.document.write(html + css + js)
+    executor.document.head.innerHTML = `<style>${css}</style>`
+    executor.document.body.innerHTML = `${html}<script>${js}</script>`
     executor.document.close()
 }
 

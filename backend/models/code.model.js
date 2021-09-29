@@ -5,13 +5,9 @@ module.exports = (sequelize, Sequelize) => {
             unique: true,
             type: Sequelize.STRING
         },
-        language: {
-            allowNull: false,
-            type: Sequelize.STRING
-        },
         content: {
             allowNull: false,
-            type: Sequelize.TEXT('long')
+            type: Sequelize.JSONB
         },
         link: {
             allowNull: false,

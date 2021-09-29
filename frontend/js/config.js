@@ -32,3 +32,9 @@ export const modelDefinitions = {
         state: null
     },
 }
+
+export const modelMappings = {
+    html: '$model1',
+    css: '$model2',
+    javascript: `$model3`
+}

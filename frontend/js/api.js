@@ -41,7 +41,7 @@ api.fetchCode = async (id) => {
     return response.json()
 }
 
-api.saveCode = async ({ language, content }) => {
+api.saveCode = async ({ content }) => {
     const name = generatedString
     const link = `${process.env.APP_URL}/${name}`
     const expiresAt = exactly24HoursFromNow
@@ -54,7 +54,6 @@ api.saveCode = async ({ language, content }) => {
         },
         body: JSON.stringify({
             name,
-            language,
             content,
             link,
             expiresAt

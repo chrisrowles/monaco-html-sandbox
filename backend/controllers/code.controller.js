@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
     const errors = []
-    const required = ['name', 'language', 'content']
+    const required = ['name', 'content', 'link']
     required.forEach((key) => {
         if (!req.body[key]) errors.push(key)
     })
