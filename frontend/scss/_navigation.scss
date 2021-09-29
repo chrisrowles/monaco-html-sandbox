@@ -31,11 +31,23 @@
         color: #aaaaaa;
         background: #2b2b2b;
 
+        svg[data-icon='sun']:hover {
+            color: #f0bf1d;
+        }
+
         &.social {
             background: #222222;
             padding-left: .5em;
             padding-right: .5em;
             border: none;
+
+            svg[data-icon='twitter']:hover {
+                color: #1d9bf0ff;
+            }
+
+            svg[data-icon='github']:hover {
+                color: #ffffff;
+            }
         }
 
         &.active {

@@ -12,6 +12,7 @@ import {
     faLink,
     faMoon,
     faShare,
+    faSun,
     faTerminal,
     faTimes
 } from '@fortawesome/free-solid-svg-icons'
@@ -29,6 +30,7 @@ library.add(
     faLink,
     faMoon,
     faShare,
+    faSun,
     faTerminal,
     faTwitter,
     faTimes
